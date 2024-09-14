@@ -33,6 +33,7 @@ const SearchInputStyled = styled.div<SearchInputStyledProps>`
       outline: none;
       font-size: 1rem;
       min-width: unset;
+      width: 100%;
 
       &:focus {
         border: none;
