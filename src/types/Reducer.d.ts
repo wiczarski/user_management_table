@@ -4,9 +4,20 @@ export interface LayoutState {
 
 export type FieldId = "name" | "username" | "email" | "phone";
 
+export type InputTypes =
+  | "text"
+  | "number"
+  | "email"
+  | "password"
+  | "date"
+  | "checkbox"
+  | "radio"
+  | "tel";
+
 export interface Field {
   id: FieldId;
   name: string;
+  type: InputTypes;
   targetWidth: string;
 }
 
