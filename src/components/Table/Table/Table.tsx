@@ -83,8 +83,11 @@ function Table() {
     return <Row key={index} dataFields={dataFields} userData={userData} />;
   });
 
+  const isSearchNotMatched =
+    !error && !loading && searchedUserData.length === 0;
+
   const table = (
-    <>
+    <Card>
       <table>
         <thead>
           <tr className="headers">{headers}</tr>
@@ -92,7 +95,8 @@ function Table() {
         </thead>
         <tbody>{rows}</tbody>
       </table>
-    </>
+      {isSearchNotMatched && <Feedback text={texts.NO_RESULTS} />}
+    </Card>
   );
 
   const getTableContent = () => {
@@ -101,17 +105,7 @@ function Table() {
     if (error) return <Feedback text={error} />;
   };
 
-  const isSearchNotMatched =
-    !error && !loading && searchedUserData.length === 0;
-
-  return (
-    <TableStyled>
-      <Card>
-        {getTableContent()}
-        {isSearchNotMatched && <Feedback text={texts.NO_RESULTS} />}
-      </Card>
-    </TableStyled>
-  );
+  return <TableStyled>{getTableContent()}</TableStyled>;
 }
 
 export default Table;
