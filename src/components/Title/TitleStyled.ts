@@ -7,11 +7,13 @@ const TitleStyled = styled.h1`
   text-align: center;
   color: ${themes.dark};
   font-size: 4rem;
-  margin-top: 15vh;
+  margin: 0px 5vw;
+  margin-top: 10vh;
+  margin-bottom: 1.5rem;
 
   @media (min-width: 1200px) {
     font-size: 4rem;
-    margin-top: 15vh;
+    margin-top: 10vh;
   }
   @media (min-width: 1024px) and (max-width: 1200px) {
     margin-top: 10vh;
@@ -23,10 +25,12 @@ const TitleStyled = styled.h1`
   @media (min-width: 480px) and (max-width: 768px) {
     font-size: 3rem;
     margin-top: 5vh;
+    margin-bottom: 0.5rem;
   }
   @media (max-width: 480px) {
-    font-size: 2rem;
+    font-size: 2.5rem;
     margin-top: 3vh;
+    margin-bottom: 0.5rem;
   }
 `;
 
