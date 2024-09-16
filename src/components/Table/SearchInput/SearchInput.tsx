@@ -36,9 +36,9 @@ function SearchInput({field}: SearchInputProps) {
       <div className={`input_box ${value ? "occupied" : ""}`}>
         <input
           id={field.id}
+          type={field.type}
           autoComplete="off"
           value={value}
-          type="text"
           className="search-input"
           placeholder={`${field.name}...`}
           onChange={changeHandler}
