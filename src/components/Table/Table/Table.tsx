@@ -3,19 +3,22 @@ import {useEffect, useRef} from "react";
 import {AppDispatch} from "../../../store/reducer/reducer-index";
 import Feedback from "../Feedback/Feedback";
 import Row from "../Row/Row";
-import SearchBar from "../SearchBar/SearchBar";
-import TableStyled, {Th} from "./TableStyled";
+import TableStyled from "./TableStyled";
 import {fetchUserData} from "../../../store/reducer/slice-users_data";
 import {layoutActions} from "../../../store/reducer/slice-layout";
 import {RootState, User} from "../../../types/Reducer";
 import {stringContains} from "../../../utils/functions";
 import {texts} from "../../../texts/texts";
+import SearchInput from "../SearchInput/SearchInput";
+import Card from "../Card/Card";
 
 function Table() {
   const dispatch = useDispatch<AppDispatch>();
   const thRefs = useRef<(HTMLElement | null)[]>([]);
   const dataFields = useSelector((state: RootState) => state.dataFields);
-  const searchInputs = useSelector((state: RootState) => state.searchInputs);
+  const searchInputsData = useSelector(
+    (state: RootState) => state.searchInputs
+  );
   const {usersData, loading, error} = useSelector(
     (state: RootState) => state.usersData
   );
@@ -52,23 +55,28 @@ function Table() {
   }, [dataFields, usersData, dispatch]);
 
   const headers = dataFields.map((field, index) => (
-    <Th
+    <th
       key={index}
       ref={(el) => {
         thRefs.current[index] = el;
       }}
-      $width={field.targetWidth}
     >
       {field.name}
-    </Th>
+    </th>
+  ));
+
+  const searchInputs = dataFields.map((field, index) => (
+    <SearchInput key={index} field={field} />
   ));
 
   const searchedUserData = usersData.filter((userData) => {
-    return Object.entries(searchInputs).every(([inputField, inputValue]) => {
-      const str = userData[inputField as keyof User];
-      const phrase = inputValue;
-      return stringContains(str, phrase);
-    });
+    return Object.entries(searchInputsData).every(
+      ([inputField, inputValue]) => {
+        const str = userData[inputField as keyof User];
+        const phrase = inputValue;
+        return stringContains(str, phrase);
+      }
+    );
   });
 
   const rows = searchedUserData.map((userData, index) => {
@@ -77,10 +85,10 @@ function Table() {
 
   const table = (
     <>
-      <SearchBar dataFields={dataFields} />
       <table>
         <thead>
-          <tr>{headers}</tr>
+          <tr className="headers">{headers}</tr>
+          <tr>{searchInputs}</tr>
         </thead>
         <tbody>{rows}</tbody>
       </table>
@@ -98,8 +106,10 @@ function Table() {
 
   return (
     <TableStyled>
-      {getTableContent()}
-      {isSearchNotMatched && <Feedback text={texts.NO_RESULTS} />}
+      <Card>
+        {getTableContent()}
+        {isSearchNotMatched && <Feedback text={texts.NO_RESULTS} />}
+      </Card>
     </TableStyled>
   );
 }

@@ -1,38 +1,34 @@
 import styled from "styled-components";
-import {SearchInputStyledProps} from "../../../types/Props";
 import {themes} from "../../../styles/theme";
 
-const SearchInputStyled = styled.div<SearchInputStyledProps>`
+const SearchInputStyled = styled.th`
   position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-shrink: 0;
-  width: ${(props) => `${props.$width}px`};
+  padding: 0px;
 
   .input_box {
+    border: 1px solid ${themes.dark};
+    border-radius: 50px;
+    color: ${themes.dark};
     display: flex;
     justify-content: space-between;
-    width: 100%;
-    border: 2px solid ${themes.dark};
-    border-radius: 20px;
-    color: ${themes.dark};
     padding: 0.4rem 1rem;
-    margin: 0rem 0.1rem;
+    width: 100%;
 
     &.occupied {
-      background-color: ${themes.light};
+      background-color: ${themes.theme1};
+      color: ${themes.bright};
 
       input {
-        background-color: ${themes.light};
+        background-color: ${themes.theme1};
+        color: ${themes.bright};
       }
     }
 
     input {
       border: none;
-      outline: none;
       font-size: 1rem;
       min-width: unset;
+      outline: none;
       width: 100%;
 
       &:focus {
@@ -42,16 +38,18 @@ const SearchInputStyled = styled.div<SearchInputStyledProps>`
     }
 
     .icon-wrapper {
+      height: 1.25rem;
       position: relative;
       width: 1.25rem;
-      height: 1.25rem;
 
       .icon {
         position: absolute;
-        top: 1px;
         left: 0;
+        top: 1px;
         opacity: 0;
-        transition: opacity 0.15s ease, transform 0.25s ease;
+        transition:
+          opacity 0.2s ease,
+          transform 0.25s ease;
       }
 
       .search-icon {
@@ -60,14 +58,19 @@ const SearchInputStyled = styled.div<SearchInputStyledProps>`
       }
 
       .x-icon {
-        top: -2px;
         font-size: 1.45rem;
+        top: -2px;
         transform: translateX(-80%);
       }
 
       .shown {
+        cursor: auto;
         opacity: 1;
         transform: translateX(0%);
+
+        &.x-icon {
+          cursor: pointer;
+        }
       }
     }
   }

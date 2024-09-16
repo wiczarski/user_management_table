@@ -7,7 +7,7 @@ import {SearchInputProps} from "../../../types/Props";
 import {faSearch, faTimes} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
-function SearchInput({field, width}: SearchInputProps) {
+function SearchInput({field}: SearchInputProps) {
   const [value, setValue] = useState<string>("");
   const dispatch = useDispatch<AppDispatch>();
 
@@ -32,15 +32,15 @@ function SearchInput({field, width}: SearchInputProps) {
   };
 
   return (
-    <SearchInputStyled $width={width}>
+    <SearchInputStyled>
       <div className={`input_box ${value ? "occupied" : ""}`}>
         <input
           id={field.id}
-          autoComplete={field.name}
+          autoComplete="off"
           value={value}
           type="text"
           className="search-input"
-          placeholder="Search..."
+          placeholder={`${field.name}...`}
           onChange={changeHandler}
         />
         <div className="icon-wrapper">

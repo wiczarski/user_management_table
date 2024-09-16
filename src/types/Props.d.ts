@@ -2,11 +2,10 @@ import {DataFieldsState, Field, User} from "./Reducer";
 
 export interface SearchInputProps {
   field: Field;
-  width: string | number;
 }
 
-export interface SearchBarProps {
-  dataFields: DataFieldsState;
+export interface CardProps {
+  children: React.ReactNode;
 }
 
 export interface RowProps {
